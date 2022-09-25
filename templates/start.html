@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEh5m7WMOrSWdKSE01cH1Fg8fat-5zrss&libraries=places"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FEAT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='start.css') }}">
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    data-tag="font"
+  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function alertUser(){
+        if ('{{msg}}'){
+            alert('{{msg}}')
+        }
+    }
+  </script>
+  </head>
+  <body onload="alertUser()">
+    <nav class="navbar justify-content-between" id="main-nav">
+        <a className="navbar-brand" id="logo" href="/">FEATwear</a>
+        {%- if account -%}
+        <div>
+            <a href="/profile" class="btn my-2 my-sm-0" id="btn" type="submit">Welcome, {{account[1]}}</a>
+            <a href="/logout" class="btn my-2 my-sm-0" id="btn" type="submit">Logout</a>
+        </div>
+        {% else %}
+        <div>
+            <a href="/register" class="btn my-2 my-sm-0" id="btn" type="submit">Register</a>
+            <a href="/login" class="btn my-2 my-sm-0" id="btn" type="submit">Login</a>
+        </div>
+        {% endif %}
+      </nav>
+    <div class="container-expand" id="main-bg">
+        <div class="row">
+            <div class="container-fluid bg-white col" id="content-hold">
+                <div class="container-fluid col d-grid gap-3 justify-content-center">
+                    <form action="{{ url_for('start') }}" method="post">
+                        <div class="d-grid gap-1">
+                        <label for="location">
+                            <i></i>
+                        </label>
+                        <input type="text" class="form-control" id="searchTextField" name="location" placeholder="Enter city name" id="location" required>
+                        <input type="submit" id="btn" class="btn btn-primary btn-lg btn-block" value="Enter">
+                    </div>
+                    </form>
+                    {%- if weather -%}
+                    <div class="lead">Forecast for:</div>
+                    <div class="display-5">{{ weather.city }}</div>
+                    <div class="display-1 pb-3 mb-3">{{ weather.temp }}°F</div>
+                    <div class="lead">{{ weather.weather }}</div>
+                    <div class="lead">High: {{ weather.max }}°F Low: {{ weather.min }}°F</div>
+                    <p>&nbsp;</p>
+                    {% else %}
+                    <div class="lead">Enter a city for weather information</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="container-fluid bg-white col" id="content-hold">
+                <div class="container-fluid col d-grid gap-3 justify-content-center">
+                    <form action="{{ url_for('start') }}" method="post" required>
+                        <label for="zodiacs">
+                            <i></i>
+                        </label>
+                        <select class="form-control" name="zodiacs" id="zodiacs" onchange="this.form.submit()">
+                            <option value="aries">Aries</option>
+                            <option value="taurus">Taurus</option>
+                            <option value="gemini">Gemini</option>
+                            <option value="cancer">Cancer</option>
+                            <option value="leo">Leo</option>
+                            <option value="virgo">Virgo</option>
+                            <option value="libra">Libra</option>
+                            <option value="scorpio">Scorpio</option>
+                            <option value="sagittarius">Sagittarius</option>
+                            <option value="capricorn">Capricorn</option>
+                            <option value="aquarius">Aquarius</option>
+                            <option value="pisces">Pisces</option>
+                        </select>
+                    </form>
+                    {%- if color -%}
+                    <script>
+                        var zodiacs = document.getElementById("zodiacs");
+                        for (const opt in zodiacs){
+                            if(zodiacs[opt].value === '{{color.zodiac}}'.toLowerCase()){
+                                zodiacs[opt].selected = true;
+                            }
+                        }
+                    </script>
+                    <div class="lead">Lucky color(s) for <b>{{ color.zodiac }}</b> on {{ color.date }}:</div>
+                    {% for i in range(color.colors|length) %}
+                        <div class="lead">{{ color.colors[i] }}</div>
+                        <div style="background-color: {{color.hex[i]}}; height: 25px; width: 70%; padding: 10px; border: 1px solid black; border-radius: 2%; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);"></div>
+                        <p>&nbsp;</p>
+                    {% endfor %}
+                    {% else %}
+                    <div class="lead">Select a zodiac sign for color suggestions</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function initialize() {
+        var options = {
+            types: ['(cities)']
+        };
+        var input = document.getElementById('searchTextField');
+        new google.maps.places.Autocomplete(input, options);
+    }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </body>
+</html>

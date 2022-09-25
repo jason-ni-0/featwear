@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Profile</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        data-tag="font"
+      />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+	</head>
+	<body>
+        <nav class="navbar justify-content-between" id="main-nav">
+            <a className="navbar-brand" id="logo" href="/">FEATwear</a>
+            <div>
+                <a href="/profile" class="btn my-2 my-sm-0" id="btn" type="submit">Welcome, {{account[1]}}</a>
+                <a href="/logout" class="btn my-2 my-sm-0" id="btn" type="submit">Logout</a>
+            </div>
+        </nav>
+        <div class="container-fluid" id="main-bg">
+            <div class="card gap-4 justify-content-center" id="content-hold">
+                <h1 class="card-header text-center" style="background-color: white;">Profile</h1>
+                <div class="card-body">
+                    <p>Your account details are below:</p>
+                    <table>
+                        <tr>
+                            <td>Username:</td>
+                            <td>{{ account[1] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td> ***** </td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ account[2] }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+		</div>
+	</body>
+</html>

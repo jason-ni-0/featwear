@@ -1,0 +1,57 @@
+#logo {
+    border: 1px solid white;
+    background-color: white;
+    font-family: Fira Sans; 
+    font-size: 22px; 
+    color: black;
+    border-radius: 10%;
+    font-weight: bold;
+    padding: 8px;
+    margin: 10px;
+    margin-left: 5px;
+    box-shadow: 0 3px 10px rgb(230 230 230 / 0.2);
+    text-decoration: none;
+}
+#main-nav {
+    background-color: #511660;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    padding: 10px
+}
+#main-bg {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    padding-top: 2%;
+}
+#content-hold{
+    margin: auto;
+    border-radius: 1%;
+    padding: 25px;
+    padding-top: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    width: 400px;
+}
+#btn{
+    border:2px solid black;
+    background-color: #511660;
+    color: white
+}
+#btn:hover, #btn:focus{
+    border:2px solid gray;
+    background-color: white;
+    color: #511660
+}
+body {
+    font-family: Fira Sans;
+}
+a{
+    cursor: pointer;
+}
+.nav-pills > li > a.active{
+    background-color:#511660 !important;
+}
+.nav-pills > li > a{
+    color:black
+}
