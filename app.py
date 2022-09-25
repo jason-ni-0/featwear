@@ -26,6 +26,8 @@ metadata = MetaData(engine)
 
 app.secret_key = 'secret'
 
+WEATHER_API_KEY=os.getenv("WEATHER_API_KEY")
+
 @app.route('/', methods=['GET', 'POST'])
 def start():
     def getLoc():
@@ -45,7 +47,7 @@ def start():
         account_details = (session['id'],session['username'],session['email'])
     if 'location' in request.form:
         loc = session['location'] = request.form['location']
-        URL = f'http://api.openweathermap.org/geo/1.0/direct?q={loc}&limit=5&appid=b417a914a5321e9318276a1bb6b2170f'
+        URL = f'http://api.openweathermap.org/geo/1.0/direct?q={loc}&limit=5&appid={WEATHER_API_KEY}'
         try:
             res = requests.get(URL).json()[0]
         except:
