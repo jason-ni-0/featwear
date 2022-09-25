@@ -14,7 +14,7 @@ import os
 app = Flask(__name__)
 app.config.from_object(Config)
 
-DB_URI = app.config['SQLALCHEMY_DATABASE_URI']
+DB_URI = os.getenv("DATABASE_URI")
 engine = create_engine(DB_URI)
 
 CORS(app, support_credentials=True)
