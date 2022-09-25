@@ -27,6 +27,7 @@ metadata = MetaData(engine)
 app.secret_key = 'secret'
 
 WEATHER_API_KEY=os.getenv("WEATHER_API_KEY")
+GMAPS_API_KEY=os.getenv("GMAPS_API_KEY")
 
 @app.route('/', methods=['GET', 'POST'])
 def start():
@@ -61,7 +62,7 @@ def start():
         zod = session['colors'] = request.form['zodiacs']
         URL=f'https://feat-wear.herokuapp.com/color?zodiac={zod}'
         session['colors'] = requests.get(URL).json()
-    return render_template('start.html', weather=getLoc(), color=getZod(),account=account_details)
+    return render_template('start.html', weather=getLoc(), color=getZod(),account=account_details, GMAPS=GMAPS_API_KEY)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
