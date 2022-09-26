@@ -26,6 +26,7 @@
     padding-top: 2%;
 }
 #content-hold{
+    margin: auto;
     border-radius: 1%;
     padding: 25px;
     padding-top: 10px;
